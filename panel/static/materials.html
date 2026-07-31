@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatCut 便携素材面板</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">ChatCut × HyperFrames</p>
+      <h1>便携素材面板</h1>
+      <p>导入文件夹、打标签、审核角色并创建明确的 ChatCut 同步请求。</p>
+    </div>
+    <button id="refreshButton" class="secondary">刷新</button>
+  </header>
+
+  <main>
+    <section class="panel grid two">
+      <form id="importForm">
+        <h2>导入本地素材</h2>
+        <label>素材文件夹<input id="folderInput" required placeholder="D:\商品素材"></label>
+        <label>产品批次<input id="batchInput" required placeholder="SKU 或产品名称"></label>
+        <label class="check"><input id="recursiveInput" type="checkbox">包含子文件夹</label>
+        <button>导入视频</button>
+      </form>
+
+      <form id="syncForm">
+        <h2>同步到 ChatCut 混剪</h2>
+        <label>ChatCut 项目 URL<input id="projectUrlInput" required placeholder="https://app.chatcut.io/zh/editor/..."></label>
+        <label>产品名 / SKU<input id="productKeyInput" required placeholder="只同步一个产品"></label>
+        <button>将已勾选且 ready 的素材加入队列</button>
+      </form>
+    </section>
+
+    <section class="panel monitor">
+      <div>
+        <p class="eyebrow">日本剪辑导演监控</p>
+        <h2 id="monitorTitle">尚未读取</h2>
+      </div>
+      <div id="monitorRoles" class="chips"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">素材库</p>
+          <h2 id="materialCount">0 条素材</h2>
+        </div>
+        <div class="filters">
+          <select id="batchFilter"><option value="">全部批次</option></select>
+          <input id="searchInput" placeholder="搜索名称或标签">
+        </div>
+      </div>
+      <div id="materialGrid" class="material-grid"></div>
+    </section>
+
+    <section class="panel">
+      <p class="eyebrow">ChatCut 同步队列</p>
+      <div id="syncQueue" class="queue"></div>
+    </section>
+  </main>
+
+  <div id="toast" role="status"></div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

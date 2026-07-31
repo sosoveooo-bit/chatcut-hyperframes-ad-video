@@ -3,11 +3,12 @@
 ## Contents
 
 1. Ownership split
-2. Default timeline contract
-3. Timing model
-4. HyperFrames handoff
-5. Upload fallback
-6. Verification contract
+2. Panel-to-ChatCut sync
+3. Default timeline contract
+4. Timing model
+5. HyperFrames handoff
+6. Upload fallback
+7. Verification contract
 
 ## 1. Ownership Split
 
@@ -27,7 +28,36 @@ Use HyperFrames for:
 
 Never replace the complete ChatCut timeline with one flattened HyperFrames render.
 
-## 2. Default Timeline Contract
+## 2. Panel-to-ChatCut Sync
+
+1. Import one local or NAS folder into a named product batch in the bundled panel.
+2. Assign roles and tags, then mark reviewed items `ready`.
+3. Queue selected items or one explicit batch with a ChatCut project URL and product key.
+4. Read the next request:
+
+   ```powershell
+   python scripts/material_sync.py next
+   ```
+
+5. Claim it before upload and generate an exact manifest:
+
+   ```powershell
+   python scripts/material_sync.py claim --request-id REQUEST_ID
+   python scripts/material_sync.py manifest --request-id REQUEST_ID --output .\manifest.json
+   ```
+
+6. Verify the requested project through the ChatCut connector when available.
+7. Create one ChatCut import session and upload every readable manifest path once. Do not store OAuth or short-lived upload tokens in the panel.
+8. Write per-item results back:
+
+   ```powershell
+   python scripts/material_sync.py mark --request-id REQUEST_ID --updates-file .\updates.json
+   ```
+
+9. Keep failed items retryable and preserve fingerprints to prevent duplicate project imports.
+10. Syncing assets does not replace or recut the existing timeline unless the user explicitly asks for a remix.
+
+## 3. Default Timeline Contract
 
 | Track | Purpose | Rule |
 | --- | --- | --- |
@@ -40,7 +70,7 @@ Never replace the complete ChatCut timeline with one flattened HyperFrames rende
 
 Track names may differ. Preserve their functional separation.
 
-## 3. Timing Model
+## 4. Timing Model
 
 For a 20–30 second direct-response video:
 
@@ -55,7 +85,7 @@ For a 20–30 second direct-response video:
 
 Adapt the boundaries to narration and available evidence. Preserve story order rather than forcing exact seconds.
 
-## 4. HyperFrames Handoff
+## 5. HyperFrames Handoff
 
 1. Generate the enhancement brief:
 
@@ -83,7 +113,7 @@ Adapt the boundaries to narration and available evidence. Preserve story order r
 
 Use separate assets instead of one six-second overlay when the editor cannot reuse source ranges cleanly.
 
-## 5. Upload Fallback
+## 6. Upload Fallback
 
 Prefer this order:
 
@@ -103,7 +133,7 @@ For the native fallback:
 - Emphasize one phrase or price with warm yellow; keep supporting text white.
 - Keep the bottom 15% clear.
 
-## 6. Verification Contract
+## 7. Verification Contract
 
 Verify structure:
 

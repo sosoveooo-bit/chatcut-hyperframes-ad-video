@@ -16,6 +16,20 @@ Build the main cut in ChatCut and add motion design with HyperFrames without fla
 5. Read the installed `hyperframes` entry skill before authoring, editing, or rendering a HyperFrames composition.
 6. Read the active browser-control skill before operating ChatCut in a browser.
 
+## Bootstrap the Portable Bundle
+
+1. Run `python scripts/doctor.py` on first use or after moving to another computer.
+2. If the report shows missing setup, run the bundled Windows installer:
+
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File scripts/setup.ps1 -StartPanel
+   ```
+
+3. Let the setup script create a portable material vault, initialize the local panel, and install the official HyperFrames skills through `npx`.
+4. Open `http://127.0.0.1:8794/materials.html` after setup.
+5. Keep ChatCut authentication and ElevenLabs credentials in their owning applications or environment. Never write them into this repository or panel data.
+6. Read `references/installation.md` for custom paths, prerequisites, and manual recovery.
+
 ## Default Production Contract
 
 - Keep the ChatCut timeline editable.
@@ -38,6 +52,10 @@ Build the main cut in ChatCut and add motion design with HyperFrames without fla
 
 ### 2. Select and Order Material
 
+- Prefer the bundled panel at `http://127.0.0.1:8794/materials.html` when it is running.
+- Import a local or NAS folder into one named product batch, assign roles and tags, and mark only reviewed items `ready`.
+- Create one explicit ChatCut sync request for selected items or one product batch; never queue the entire library ambiguously.
+- Use `scripts/material_sync.py manifest` to consume the exact queued request before importing assets into ChatCut.
 - Assign each usable moment one role: `hook`, `try_on`, `detail`, `motion`, `proof`, `ending`, or `transition`.
 - Prefer 6–12 strong moments for a 20–30 second ad.
 - Keep 2–5 distinct moments from the same source in one contiguous block.
@@ -57,6 +75,7 @@ Build the main cut in ChatCut and add motion design with HyperFrames without fla
 
 - Generate narration before final caption timing.
 - Prefer ElevenLabs multilingual voice synthesis when available; use the user-selected voice and model.
+- If ChatCut has no configured ElevenLabs provider, run `scripts/elevenlabs_tts.py` with a user-provided voice ID and import the generated MP3 into `A1`.
 - Inspect the generated audio duration before placing it. Never trim a sentence mid-phrase to fit the timeline.
 - Shorten the script or regenerate slightly faster when narration exceeds the available duration.
 - Generate independent captions from the final voice asset, not from a replaced draft.
@@ -95,7 +114,14 @@ Build the main cut in ChatCut and add motion design with HyperFrames without fla
 
 ## Use Bundled Resources
 
+- `references/installation.md`: portable setup, external prerequisites, and secret-handling rules.
 - `references/workflow.md`: track contract, timing model, editor handoff, and verification rules.
 - `references/chatcut-prompts.md`: reusable prompts for ChatCut's built-in editing agent.
 - `assets/剪辑配置.template.md`: sanitized project-level editing defaults.
 - `scripts/create_hyperframes_brief.py`: generate a HyperFrames enhancement brief and placement specification.
+- `scripts/elevenlabs_tts.py`: generate narration through ElevenLabs using an environment key.
+- `scripts/setup.ps1`: initialize the portable vault, local panel, and official HyperFrames dependency.
+- `scripts/doctor.py`: report missing runtime dependencies without exposing secret values.
+- `scripts/material_sync.py`: claim, manifest, and update queued ChatCut material requests.
+- `scripts/self_test.py`: run an isolated end-to-end test of the portable panel and sync queue.
+- `panel/`: local-only material tagging and ChatCut sync-request panel.
