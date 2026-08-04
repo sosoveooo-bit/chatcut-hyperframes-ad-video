@@ -1,11 +1,11 @@
 ---
 name: chatcut-hyperframes-ad-video
-description: Orchestrate editable ecommerce short-video production by combining ChatCut timelines with HyperFrames motion graphics. Use when Codex needs to make, remix, revise, or review Meta/Facebook/TikTok ads; group source clips coherently; generate Japanese or multilingual ElevenLabs voiceover and captions; add hook, benefit, price, or CTA overlays; sync tagged materials into ChatCut; or preserve an editable ChatCut project while using HyperFrames for polished motion design.
+description: Operate ChatCut's built-in AI editor or Codex connector to create editable ecommerce short-video remixes, with optional HyperFrames motion graphics. Use when Codex needs to make, remix, revise, migrate, or review Meta/Facebook/TikTok ads; preserve source-contiguous clip blocks; generate Japanese or multilingual ElevenLabs voiceover and captions; add hook, benefit, price, or CTA overlays; reproduce the workflow on another computer; or keep a ChatCut project editable while applying a reusable saved Skill.
 ---
 
-# ChatCut HyperFrames Ad Video
+# ChatCut Direct Remix
 
-Build the main cut in ChatCut and add motion design with HyperFrames without flattening the editable timeline.
+Build the complete editable cut through ChatCut's own AI panel by default. Use HyperFrames and the local material panel only when the task explicitly needs them.
 
 ## Start Every Task
 
@@ -13,22 +13,28 @@ Build the main cut in ChatCut and add motion design with HyperFrames without fla
 2. Copy `assets/剪辑配置.template.md` into a new project only when no project configuration exists and a persistent default is useful.
 3. Read `references/workflow.md` before changing a live timeline.
 4. Read `references/chatcut-prompts.md` when operating ChatCut through its built-in agent.
-5. Read the installed `hyperframes` entry skill before authoring, editing, or rendering a HyperFrames composition.
-6. Read the active browser-control skill before operating ChatCut in a browser.
+5. Use `assets/chatcut-direct-remix-skill.txt` when the user wants to save or recreate this workflow inside ChatCut's Skills picker.
+6. Read the installed `hyperframes` entry skill only before authoring, editing, or rendering a HyperFrames composition.
+7. Read the active browser-control skill before operating ChatCut in a browser.
 
-## Bootstrap the Portable Bundle
+## Choose the Operating Mode
 
-1. Run `python scripts/doctor.py` on first use or after moving to another computer.
-2. If the report shows missing setup, run the bundled Windows installer:
+### Direct ChatCut mode — default
 
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File scripts/setup.ps1 -StartPanel
-   ```
+1. Open ChatCut and let the user sign in. Never request their credentials.
+2. Use the AI panel in `Agent` mode and the media already uploaded to `My Assets`.
+3. For reusable setup, open `Skills` and save the contents of `assets/chatcut-direct-remix-skill.txt` as a user-owned ChatCut Skill.
+4. On another computer with the same ChatCut account, use the synced project and saved Skill without running a local panel.
+5. For another ChatCut account, share the project through ChatCut and recreate the saved Skill from the same text asset.
 
-3. Let the setup script create a portable material vault, initialize the local panel, and install the official HyperFrames skills through `npx`.
-4. Open `http://127.0.0.1:8794/materials.html` after setup.
-5. Keep ChatCut authentication and ElevenLabs credentials in their owning applications or environment. Never write them into this repository or panel data.
-6. Read `references/installation.md` for custom paths, prerequisites, and manual recovery.
+### Optional local extensions
+
+Use the portable material panel only when the user explicitly wants local/NAS tagging, queueing, or batch sync. Use HyperFrames only when external motion-design rendering is requested.
+
+1. Run `python scripts/doctor.py` before first optional local use.
+2. Run `powershell -ExecutionPolicy Bypass -File scripts/setup.ps1 -StartPanel` to initialize the optional panel and HyperFrames dependency.
+3. Keep ChatCut authentication and ElevenLabs credentials in their owning applications or environment. Never write them into this repository or panel data.
+4. Read `references/installation.md` for cross-computer setup, data boundaries, and manual recovery.
 
 ## Default Production Contract
 
@@ -52,7 +58,8 @@ Build the main cut in ChatCut and add motion design with HyperFrames without fla
 
 ### 2. Select and Order Material
 
-- Prefer the bundled panel at `http://127.0.0.1:8794/materials.html` when it is running.
+- Prefer assets already uploaded to ChatCut `My Assets` in direct mode.
+- Use the bundled panel at `http://127.0.0.1:8794/materials.html` only for an explicitly requested local/NAS material workflow.
 - Import a local or NAS folder into one named product batch, assign roles and tags, and mark only reviewed items `ready`.
 - Create one explicit ChatCut sync request for selected items or one product batch; never queue the entire library ambiguously.
 - Use `scripts/material_sync.py manifest` to consume the exact queued request before importing assets into ChatCut.
@@ -117,6 +124,7 @@ Build the main cut in ChatCut and add motion design with HyperFrames without fla
 - `references/installation.md`: portable setup, external prerequisites, and secret-handling rules.
 - `references/workflow.md`: track contract, timing model, editor handoff, and verification rules.
 - `references/chatcut-prompts.md`: reusable prompts for ChatCut's built-in editing agent.
+- `assets/chatcut-direct-remix-skill.txt`: paste-ready definition for ChatCut's own saved Skills feature.
 - `assets/剪辑配置.template.md`: sanitized project-level editing defaults.
 - `scripts/create_hyperframes_brief.py`: generate a HyperFrames enhancement brief and placement specification.
 - `scripts/elevenlabs_tts.py`: generate narration through ElevenLabs using an environment key.

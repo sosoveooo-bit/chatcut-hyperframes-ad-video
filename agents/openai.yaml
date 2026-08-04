@@ -1,4 +1,4 @@
 interface:
-  display_name: "ChatCut × HyperFrames 广告视频"
-  short_description: "用ChatCut主时间线与HyperFrames动效制作可编辑广告视频"
-  default_prompt: "使用 $chatcut-hyperframes-ad-video 把我的素材制作成可编辑的电商广告视频。"
+  display_name: "ChatCut 原生广告混剪"
+  short_description: "让ChatCut内置AI按同源连续块制作可编辑广告"
+  default_prompt: "使用 $chatcut-hyperframes-ad-video 直接在当前ChatCut项目中混剪可编辑电商广告，不使用外部素材面板。"

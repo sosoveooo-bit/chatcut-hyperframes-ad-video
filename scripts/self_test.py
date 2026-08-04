@@ -47,6 +47,7 @@ def run_tool(arguments: list[str]) -> subprocess.CompletedProcess[str]:
         capture_output=True,
         text=True,
         encoding="utf-8",
+        errors="replace",
     )
 
 
@@ -78,6 +79,7 @@ def main() -> None:
             stderr=subprocess.PIPE,
             text=True,
             encoding="utf-8",
+            errors="replace",
         )
         try:
             for _ in range(40):

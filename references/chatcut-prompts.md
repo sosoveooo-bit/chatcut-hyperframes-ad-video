@@ -2,6 +2,15 @@
 
 Use these templates only after inspecting the current project. Replace every bracketed value.
 
+## Save the Complete Workflow as a ChatCut Skill
+
+For ChatCut-native use without the local material panel, open the AI panel's `Skills` picker, choose `Save this editing process as a Skill`, and paste `assets/chatcut-direct-remix-skill.txt`.
+
+- The saved Skill belongs to the ChatCut account and is reusable across that account's projects.
+- On another computer with the same ChatCut account, select the saved Skill directly.
+- For another account, share the ChatCut project and recreate the Skill from the same text file.
+- GitHub stores the reusable workflow text, not ChatCut login sessions, cloud project rows, uploaded media, or account-specific asset IDs.
+
 ## Base Timeline
 
 ```text
